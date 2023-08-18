@@ -17,7 +17,7 @@ penalty_end_time_lock = threading.Lock()
 
 SERVER_START_TIME = timedelta(seconds = datetime.now().second)
 PENALTY_IN_SECONDS = 60 
-MAX_API_CALLS_ALLOWED = 15
+MAX_API_CALLS_ALLOWED = 3
 TOO_MANY_REQUESTS = 429
 
 def calculate_seconds_left_in_current_minute_after_last_api_call():
