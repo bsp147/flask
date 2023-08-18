@@ -102,15 +102,16 @@ def home_penalty_end_time():
 # Error handling and penalising user when MAX_API_CALLS_ALLOWED threshold is crossed
 @app.errorhandler(TOO_MANY_REQUESTS)
 def ratelimit_exception_handler(e):
-    
+    ip_address2 = request.remote_addr
+    ip_address = get_remote_address()
     endpoint = request.endpoint
     current_time = datetime.now()
-    error_message = (f"You have exceeded your rate-limit of {MAX_API_CALLS_ALLOWED} calls per minute. You can check penalty time localhost:5000/{endpoint}/penalty")
+    error_message = (f"You have exceeded your rate-limit of {MAX_API_CALLS_ALLOWED} calls per minute. You can check penalty time localhost:5000/{endpoint}/penalty  YOur IP address {ip_address}  or {ip_address2}")
     
     # Penalising user based on their IP address
     if endpoint == 'data':
         
-        ip_address = get_remote_address()
+        
 
         if ip_address in penalties and penalties[ip_address] > current_time:
             return error_message
