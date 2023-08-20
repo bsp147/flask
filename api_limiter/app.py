@@ -46,7 +46,7 @@ def update_penalties(ip_address, penalty_time):
 
 # data endpoint/API ratelimited to MAX_API_CALLS_ALLOWED per user
 @app.route("/data")
-@limiter.limit("{}/minute".format(MAX_API_CALLS_ALLOWED))  # Limiter function to limit max API calls 
+@limiter.limit("{}/minute".format(MAX_API_CALLS_ALLOWED), key_func=lambda: request.remote_addr)  # Limiter function to limit max API calls 
 def data():
 
     # Get the IP address of the requester
