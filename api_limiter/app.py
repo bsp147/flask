@@ -20,7 +20,7 @@ def requires_authentication(func):
         auth = request.authorization
         print(auth)
         if not auth or not authenticate(auth.username, auth.password):
-            return jsonify({"message": "Authentication required"}), 401
+            return auth, 401
         return func(*args, **kwargs)
     return decorated
 
